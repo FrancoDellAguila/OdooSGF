@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api
+
+class Franquicia(models.Model):
+    _name = "gelroy.franchise"
+    _description = "Information about franchise"
+    _order = "id desc, name"
+    _rec_name = 'franchise_code'
+
+    name = fields.Char(string="franchise Name", required=True)
+    franchise_code = fields.Char(string="Code", required=True)
+    street = fields.Char('Street')
+    street2 = fields.Char('Street2')
+    zip = fields.Char('Zip', change_default=True)                   #codigo postal
+    city = fields.Char('City')
+    state_id = fields.Many2one("res.country.state", string='State') #comunidad autonoma
+    country_id = fields.Many2one('res.country', string='Country')
+    phone = fields.Char('Phone',required=False)
+    mobile = fields.Char('Mobile',required=True)
+    email = fields.Char('Email')
+
+    hostel_floors = fields.Integer(string="Total Floors")
+    image = fields.Binary('Hostel Image')
+    active = fields.Boolean("Active", default=True,
+    help="Activate/Deactivate hostel record")
+    type = fields.Selection([("male", "Boys"), ("female", "Girls"),
+    ("common", "Common")], "Type", help="Type of Hostel",
+    required=True, default="common")
+    other_info = fields.Text("Other Information",
+    help="Enter more information")
+    description = fields.Html('Description')
+    hostel_rating = fields.Float('Hostel Average Rating', digits=(14, 4))
+
+    # @api.depends('franchise_code')
+    #     def _compute_display_name(self):
+    #         for record in self:
+    #             name = record.name
+    #             if record.franchise_code:
+    #                 name = f'{name} ({record.franchise_code})'
+    #             record.display_name = name

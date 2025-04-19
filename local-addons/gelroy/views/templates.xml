@@ -1,0 +1,106 @@
+<odoo>
+    <data>
+        <record id="franchise_form_view" model="ir.ui.view">
+            <field name="name">franchise.form.view</field>
+            <field name="model">gelroy.franchise</field>
+            <field name="arch" type="xml">
+                <form string="Franchise">
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                    <h3>
+                        <table>
+                        <tr>
+                            <td style="padding-right:10px;">
+                            <field name="name" required="1" 
+                            placeholder="Name" /></td>
+                            <td style="padding-right:10px;">
+                            <field name="franchise_code" placeholder="Code" 
+                            /></td>
+                        </tr>
+                        </table>
+                    </h3>
+                    </div>
+                    <group>
+                    <group>
+                        <label for="street" string="Address"/>
+                        <div class="o_address_format">
+                            <field name="street" placeholder="Street..." 
+                            class="o_address_street"/>
+                            <field name="street2" placeholder="Street 2..." 
+                            class="o_address_street"/>
+                            <field name="city" placeholder="City" 
+                            class="o_address_city"/>
+                            <field name="state_id" class="o_address_state" 
+                            placeholder="State" options='{"no_open": True}'/>
+                            <field name="zip" placeholder="ZIP" 
+                            class="o_address_zip"/>
+                            <field name="country_id" placeholder="Country"
+                            class="o_address_country" options='{"no_open": 
+                            True, "no_create": True}'/>
+                        </div>
+                        <field name="phone" widget="phone"/>
+                        <field name="mobile" widget="phone"/>
+                        <field name="email" widget="email" 
+                        context="{'gravatar_image': True}"/>
+                    </group>
+                    <group>
+                        <field name="hostel_floors"/>
+                        <field name="active"/>
+                        <field name="type"/>
+                        <field name="hostel_rating"/>
+                        <field name="other_info"/>
+                    </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="franchise_tree_view" model="ir.ui.view">
+            <field name="name">franchise.tree.view</field>
+            <field name="model">gelroy.franchise</field>
+            <field name="arch" type="xml">
+                <tree string="Franchise">
+                    <field name="name"/>
+                    <field name="franchise_code"/>  
+                </tree>
+            </field>
+        </record>
+
+        <record id="franchise_search_view" model="ir.ui.view">
+            <field name="name">Franchise search</field>
+            <field name="model">gelroy.franchise</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="franchise_code"/>  
+                </search>
+            </field>
+        </record>
+
+        <record id="franchise_action" model="ir.actions.act_window">
+            <field name="name">Franchises</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gelroy.franchise</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create Franchise.
+                </p>
+            </field>
+        </record>
+
+        <!-- <menuitem id="franchise_main_menu" name="Franchise" sequence="1"/>
+        <menuitem id="franchise_type_menu" name="Franchise" parent="franchise_main_menu" action="gelroy.franchise_action" 
+        groups="gelroy.group_franchise_manager" sequence="1"/> -->
+        <menuitem id="menu_root" name="Gestion" sequence="1"/>
+
+        <menuitem id="menu_franchises" name="Franchises" parent="menu_root"/>
+        <menuitem id="menu_franchises_list" name="Franchise List" 
+        parent="menu_franchises" action="franchise_action"/>
+    </data>
+</odoo>
