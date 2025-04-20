@@ -10,5 +10,6 @@
 </record>
 <record id="group_franchise_user" model="res.groups">
     <field name="name">Franchise User</field>
+    <field name="category_id" ref="module_category_franchise"/>
 </record>
 </odoo>

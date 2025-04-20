@@ -95,12 +95,11 @@
         </record>
 
         <!-- <menuitem id="franchise_main_menu" name="Franchise" sequence="1"/>
-        <menuitem id="franchise_type_menu" name="Franchise" parent="franchise_main_menu" action="gelroy.franchise_action" 
-        groups="gelroy.group_franchise_manager" sequence="1"/> -->
-        <menuitem id="menu_root" name="Gestion" sequence="1"/>
+        <menuitem id="franchise_type_menu" name="Franchise" parent="franchise_main_menu" action="franchise_action" 
+        groups="gelroy.group_franchise_manager" sequence="1"/>  -->
 
-        <menuitem id="menu_franchises" name="Franchises" parent="menu_root"/>
-        <menuitem id="menu_franchises_list" name="Franchise List" 
-        parent="menu_franchises" action="franchise_action"/>
+        <menuitem id="menu_root" name="Gestion" sequence="10"/>
+        <menuitem id="menu_franchises" name="Franchises" parent="menu_root" action="franchise_action" sequence="1"/>
+        <menuitem id="menu_franchises_list" name="Franchise List" parent="menu_franchises" action="franchise_action" sequence="1"/>
     </data>
 </odoo>

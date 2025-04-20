@@ -16,7 +16,6 @@ Herramienta digital que centraliza y automatiza la administración de franquicia
     'data': [
         'security/franchise_security.xml',
         'security/ir.model.access.csv',
-        'views/views.xml',
         'views/templates.xml',
     ],
     'assets': {
