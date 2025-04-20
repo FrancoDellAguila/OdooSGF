@@ -43,6 +43,7 @@
                                 <group>
                                     <field name="contract_start_date"/>
                                     <field name="contract_end_date"/>
+                                    <field name="contract_duration_months"/> 
                                     <field name="royalty_fee_percentage"/>
                                 </group>
                             </page>
