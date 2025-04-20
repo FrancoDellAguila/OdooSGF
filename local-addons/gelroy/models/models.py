@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from dateutil.relativedelta import relativedelta # Import relativedelta for more accurate month calculation
 
 class Franchise(models.Model): 
     _name = "gelroy.franchise"
@@ -40,10 +41,24 @@ class Franchise(models.Model):
     contract_end_date = fields.Date(string="Contract End Date")
     royalty_fee_percentage = fields.Float(string="Royalty Fee (%)", digits=(5, 2)) 
 
+    # Computed field for contract duration
+    contract_duration_months = fields.Integer(string="Contract Duration (Months)", compute='_compute_contract_duration', store=True) # Added store=True if you want to search/group by it
+
     # Ensure franchise_code is unique
     _sql_constraints = [
         ('franchise_code_unique', 'unique(franchise_code)', 'Franchise Code must be unique!')
     ]
+
+    @api.depends('contract_start_date', 'contract_end_date')
+    def _compute_contract_duration(self):
+        for rec in self:
+            if rec.contract_start_date and rec.contract_end_date and rec.contract_end_date > rec.contract_start_date:
+                # Use relativedelta for a more accurate month calculation
+                delta = relativedelta(rec.contract_end_date, rec.contract_start_date)
+                rec.contract_duration_months = delta.years * 12 + delta.months
+            else:
+                rec.contract_duration_months = 0
+
 
     # Optional: Compute display name if needed (using name and code)
     # @api.depends('name', 'franchise_code')
